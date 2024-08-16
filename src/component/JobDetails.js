@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import person from '../../assets/person.jpg';
@@ -6,10 +6,12 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native'
-
+import { useNavigation } from '@react-navigation/native';
 
 const JobDetails = () => {
+    const handlePress = () => {
+        Linking.openURL('https://www.google.com');
+    };
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
@@ -32,7 +34,7 @@ const JobDetails = () => {
                         </View>
                         <View style={styles.tabsContainer}>
                             <View style={styles.tab}>
-                                <EvilIcons style={{ marginBottom: 5 }} name="location" size={20} color="white" />
+                                <EvilIcons name="location" size={20} color="white" />
                                 <Text style={styles.tabText}>New York</Text>
                             </View>
                             <View style={styles.tab}>
@@ -88,7 +90,7 @@ const JobDetails = () => {
                 </View>
                 <View style={styles.bottomSpacing} />
             </ScrollView>
-            <TouchableOpacity style={styles.applyButton}>
+            <TouchableOpacity style={styles.applyButton} onPress={handlePress}>
                 <Text style={styles.applyButtonText}>Apply Now</Text>
                 <AntDesign name="arrowright" size={20} color="white" />
             </TouchableOpacity>
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         marginTop: 25,
-        marginLeft: 15,
+        alignSelf: 'center',
         width: '90%',
         height: 195,
         position: 'relative',
@@ -166,13 +168,10 @@ const styles = StyleSheet.create({
     },
     tabsContainer: {
         flexDirection: 'row',
-        marginLeft: 15,
-        marginTop: 10,
-        gap: 10,
+        paddingHorizontal: 15, // Padding inside the scroll view
+        paddingVertical: 5, // Optional: Padding top and bottom
     },
     tab: {
-        height: 30,
-        width: 100,
         backgroundColor: 'rgba(240, 240, 240, 0.2)',
         borderColor: 'white',
         borderWidth: 1,
@@ -180,6 +179,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingHorizontal: 10,
+        marginRight: 10,
+        height: 30, // Similar height as in SearchScreen
+        width: 100, // Similar width as in SearchScreen
     },
     tabText: {
         color: 'white',
@@ -190,7 +193,8 @@ const styles = StyleSheet.create({
         width: '90%',
         backgroundColor: 'rgba(240, 240, 240, 0.1)',
         borderRadius: 20,
-        marginLeft: 15,
+        alignSelf: 'center',
+        // marginLeft: 15,
         marginTop: 15,
         padding: 15,
     },
@@ -230,18 +234,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         gap: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
-        elevation: 5,
     },
     applyButtonText: {
         color: 'white',
-        fontSize: 16,
         fontWeight: '600',
+        fontSize: 15,
     },
     bottomSpacing: {
-        height: 100, // Adjust this value if needed to prevent overlapping with the button
+        height: 70, // Space for the apply button at the bottom
     },
 });
